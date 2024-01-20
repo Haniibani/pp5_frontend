@@ -16,7 +16,7 @@ import { axiosReq } from "../../clients/axios";
 import NoResults from "../../assets/upload-icon.png";
 import InfiniteScroll from "react-infinite-scroll-component";
 import fetchMoreData from "../../utils/fetchMoreData";
-// import PopularProfiles from "../profiles/PopularProfiles";
+import PopularProfiles from "../../components/PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const Posts = ({ message, filter = "" }) => {
@@ -52,7 +52,7 @@ const Posts = ({ message, filter = "" }) => {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        {/* <PopularProfiles mobile /> */}
+        <PopularProfiles mobile />
         <i className={`fas fa-search ${styles.SearchIcon}`} />
         <Form
           className={styles.SearchBar}
@@ -91,11 +91,11 @@ const Posts = ({ message, filter = "" }) => {
           </Container>
         )}
       </Col>
-      {/* <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
+      <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
         <PopularProfiles />
-      </Col> */}
+      </Col>
     </Row>
   );
-}
+};
 
 export default Posts;
