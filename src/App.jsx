@@ -11,6 +11,7 @@ import Posts from "./pages/posts/Posts";
 import Post from "./pages/posts/Post";
 import PostCreate from "./pages/posts/PostCreate";
 import PostEdit from "./pages/posts/PostEdit";
+import ProfilePage from "./pages/profiles/Profile";
 
 const App = () => {
   const currentUser = useCurrentUser();
@@ -39,6 +40,12 @@ const App = () => {
           <Route exact path="/posts/:id/edit" render={() => <PostEdit />} />
           <Route exact path="/signin" render={() => <SignIn />} />
           <Route exact path="/signup" render={() => <SignUp />} />
+          <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
+          <Route
+            exact
+            path="/profiles/:id/edit"
+            render={() => <ProfileEdit />}
+          />
         </Switch>
       </Container>
     </div>
