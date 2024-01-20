@@ -1,12 +1,21 @@
 import React from "react";
+
 import Container from "react-bootstrap/Container";
-import appStyles from "../styles/App.module.css";
-import Asset from "./Asset";
-import Profile from "./Profile";
+
 import { useProfileData } from "../contexts/ProfileDataContext";
+
+import appStyles from "../styles/App.module.css";
+
+import Profile from "./Profile";
+import Asset from "./Asset";
+
+import isEmpty from "../utils/isEmpty";
 
 const PopularProfiles = ({ mobile }) => {
   const { popularProfiles } = useProfileData();
+
+
+  if (isEmpty(popularProfiles)) return <Asset spinner />;
 
   return (
     <Container
@@ -14,23 +23,17 @@ const PopularProfiles = ({ mobile }) => {
         mobile && "d-lg-none text-center mb-3"
       }`}
     >
-      {popularProfiles.results.length ? (
-        <>
-          <p>Most followed profiles.</p>
-          {mobile ? (
-            <div className="d-flex justify-content-around">
-              {popularProfiles.results.slice(0, 4).map((profile) => (
-                <Profile key={profile.id} profile={profile} mobile />
-              ))}
-            </div>
-          ) : (
-            popularProfiles.results.map((profile) => (
-              <Profile key={profile.id} profile={profile} />
-            ))
-          )}
-        </>
+      <p>Most followed profiles.</p>
+      {mobile ? (
+        <div className="d-flex justify-content-around">
+          {popularProfiles.results.slice(0, 4).map((profile) => (
+            <Profile key={profile.id} profile={profile} mobile />
+          ))}
+        </div>
       ) : (
-        <Asset spinner />
+        popularProfiles.results.map((profile) => (
+          <Profile key={profile.id} profile={profile} />
+        ))
       )}
     </Container>
   );
