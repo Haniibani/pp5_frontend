@@ -4,6 +4,8 @@ import "./App.css";
 import { Container } from "react-bootstrap";
 import { Switch, Route } from "react-router-dom";
 
+import { useCurrentUser } from "./contexts/CurrentUserContext";
+
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
 import Posts from "./pages/posts/Posts";
@@ -12,6 +14,12 @@ import PostCreate from "./pages/posts/PostCreate";
 import PostEdit from "./pages/posts/PostEdit";
 
 const App = () => {
+  const currentUser = useCurrentUser();
+  const profile_id = currentUser?.profile_id || "";
+
+  // TODO: Remove console.log of profile id
+  console.log(profile_id)
+
   return (
     <div className="App">
       <Container>
