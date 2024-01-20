@@ -4,6 +4,8 @@ import "./App.css";
 import { Container } from "react-bootstrap";
 import { Switch, Route } from "react-router-dom";
 
+import styles from "./styles/App.module.css";
+
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 
 import SignIn from "./pages/auth/SignIn";
@@ -18,11 +20,11 @@ const App = () => {
   const profile_id = currentUser?.profile_id || "";
 
   // TODO: Remove console.log of profile id
-  console.log(profile_id)
+  console.log(profile_id);
 
   return (
-    <div className="App">
-      <Container>
+    <div className={styles.App}>
+      <Container className={styles.Main}>
         <Switch>
           <Route exact path="/" render={() => <h1>Hello world</h1>} />
           <Route exact path="/posts" render={() => <Posts />} />
