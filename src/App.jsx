@@ -27,7 +27,16 @@ const App = () => {
       <Container className={styles.Main}>
         <Switch>
           <Route exact path="/" render={() => <h1>Hello world</h1>} />
-          <Route exact path="/posts" render={() => <Posts />} />
+          <Route
+            exact
+            path="/feed"
+            render={() => (
+              <Posts
+                message="No results found. Adjust the search keyword or follow a user."
+                filter={`owner__followed__owner__profile=${profile_id}&`}
+              />
+            )}
+          />
           <Route exact path="/posts/create" render={() => <PostCreate />} />
           <Route exact path="/posts/:id" render={() => <Post />} />
           <Route exact path="/posts/:id/edit" render={() => <PostEdit />} />
