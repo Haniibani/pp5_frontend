@@ -1,6 +1,3 @@
-import logo from "./logo.svg";
-import "./App.css";
-
 import { Container } from "react-bootstrap";
 import { Switch, Route } from "react-router-dom";
 
@@ -33,7 +30,7 @@ const App = () => {
             render={() => (
               <Posts
                 message="No results found. Adjust the search keyword or follow a user."
-                filter={`owner__followed__owner__profile=${profile_id}&`}
+                filter={``}
               />
             )}
           />
