@@ -1,86 +1,61 @@
-import React from "react";
-import styles from "../styles/Post.module.css";
-import { useCurrentUser } from "../contexts/CurrentUserContext";
-
-import Card from "react-bootstrap/Card";
-import Media from "react-bootstrap/Media";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import React, { useCallback } from "react";
 
 import { Link, useHistory } from "react-router-dom";
+
+import { Card, Media } from "react-bootstrap";
+
+import { useCurrentUser } from "../contexts/CurrentUserContext";
+
 import Avatar from "../components/Avatar";
-import { axiosRes } from "../clients/axios";
 import { MoreDropdown } from "../components/MoreDropdown";
 
-const Post = (props) => {
-  const {
-    id,
-    owner,
-    profile_id,
-    profile_image,
-    comments_count,
-    likes_count,
-    like_id,
-    title,
-    content,
-    image,
-    updated_at,
-    postPage,
-    setPosts,
-  } = props;
+import styles from "../styles/Post.module.css";
 
-  const currentUser = useCurrentUser();
-  const is_owner = currentUser?.username === owner;
+import { axiosRes } from "../clients/axios";
+
+import Chat from "../icons/Chat";
+import LikeButton from "./LikeButton";
+import Quote from "../icons/Quote";
+
+const Post = ({
+  id,
+  owner,
+  profile_id,
+  profile_image,
+  comments_count,
+  likes_count,
+  like_id,
+  title,
+  content,
+  image,
+  updated_at,
+  postPage,
+  setPosts,
+}) => {
   const history = useHistory();
+  const currentUser = useCurrentUser();
 
-  const handleEdit = () => {
-    history.push(`/posts/${id}/edit`);
-  };
+  const isOwner = currentUser?.username === owner;
 
-  const handleDelete = async () => {
-    try {
-      await axiosRes.delete(`/posts/${id}/`);
-      history.goBack();
-    } catch (err) {
-      // console.log(err);
-    }
-  };
+  const handleEdit = useCallback(() =>
+    history.push(`/posts/${id}/edit`, [history, id])
+  );
 
-  const handleLike = async () => {
-    try {
-      const { data } = await axiosRes.post("/likes/", { post: id });
-      setPosts((prevPosts) => ({
-        ...prevPosts,
-        results: prevPosts.results.map((post) => {
-          return post.id === id
-            ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
-            : post;
-        }),
-      }));
-    } catch (err) {
-      // console.log(err);
-    }
-  };
-
-  const handleUnlike = async () => {
-    try {
-      await axiosRes.delete(`/likes/${like_id}/`);
-      setPosts((prevPosts) => ({
-        ...prevPosts,
-        results: prevPosts.results.map((post) => {
-          return post.id === id
-            ? { ...post, likes_count: post.likes_count - 1, like_id: null }
-            : post;
-        }),
-      }));
-    } catch (err) {
-      // console.log(err);
-    }
-  };
+  const handleDelete = useCallback(
+    (async () => {
+      try {
+        await axiosRes.delete(`/posts/${id}/`);
+        history.goBack();
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    [axiosRes, history])
+  );
 
   return (
     <Card className={styles.Post}>
-      <Card.Body>
+      <Card.Body className={styles.PostBar}>
         <Media className="align-items-center justify-content-between">
           <Link to={`/profiles/${profile_id}`}>
             <Avatar src={profile_image} height={55} />
@@ -88,7 +63,7 @@ const Post = (props) => {
           </Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
-            {is_owner && postPage && (
+            {isOwner && postPage && (
               <MoreDropdown
                 handleEdit={handleEdit}
                 handleDelete={handleDelete}
@@ -96,40 +71,30 @@ const Post = (props) => {
             )}
           </div>
         </Media>
-      </Card.Body>
-      <Link to={`/posts/${id}`}>
-        <Card.Img src={image} alt={title} />
-      </Link>
-      <Card.Body>
+        <hr class="hr" />
+        <Link to={`/posts/${id}`}>
+          <Card.Img src={image} alt={title} />
+        </Link>
+        <hr class="hr" />
         {title && <Card.Title className="text-center">{title}</Card.Title>}
-        {content && <Card.Text>{content}</Card.Text>}
-        <div className={styles.PostBar}>
-          {is_owner ? (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>You can't like your own post!</Tooltip>}
-            >
-              <i className="far fa-heart" />
-            </OverlayTrigger>
-          ) : like_id ? (
-            <span onClick={handleUnlike}>
-              <i className={`fas fa-heart ${styles.Heart}`} />
+        {content && (
+          <Card.Text>
+            <span>
+              <Quote />
+              {content}
             </span>
-          ) : currentUser ? (
-            <span onClick={handleLike}>
-              <i className={`far fa-heart ${styles.HeartOutline}`} />
-            </span>
-          ) : (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>Log in to like posts!</Tooltip>}
-            >
-              <i className="far fa-heart" />
-            </OverlayTrigger>
-          )}
+          </Card.Text>
+        )}
+        <div className={styles.PostActions}>
+          <LikeButton
+            postId={id}
+            isOwner={isOwner}
+            likeId={like_id}
+            setPosts={setPosts}
+          />
           {likes_count}
           <Link to={`/posts/${id}`}>
-            <i className="far fa-comments" />
+            <Chat />
           </Link>
           {comments_count}
         </div>

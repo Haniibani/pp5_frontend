@@ -1,24 +1,36 @@
+/* Post Container Styles */
 .Post {
-    background-color: #ffffff;
-    border: 1px solid #dadadf;
-    border-radius: 2px;
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  
-  .Post figure,
-  h5 {
-    margin: 0 0;
-  }
-  
-  .Heart {
-    color: #f85032;
-  }
-  
-  .Heart:hover {
-    color: #2142b2;
-  }
-  
-  .HeartOutline:hover {
-    color: #f85032;
-  }
+  background-color: #ffffff; /* White background for post */
+  border: none; /* Lighter border for a softer look */
+  border-radius: 8px; /* Rounded corners for a modern aesthetic */
+  margin-bottom: 16px; /* Consistent bottom margin for spacing */
+  text-align: center; /* Center alignment for text and content */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Post Bar Styling */
+.PostBar {
+  padding-bottom: 8px; /* Increased padding for visual balance */
+}
+
+/* Post Content Styling */
+.Post figure,
+h5 {
+  margin: 0; /* Resets margin for figure and h5 for uniformity */
+  padding: 8px; /* Padding for spacing inside these elements */
+}
+
+/* Post Actions Area */
+.PostActions {
+  display: flex; /* Flexbox layout for better alignment and spacing */
+  gap: 8px; /* Increased gap for clearer separation of elements */
+  justify-content: center; /* Centered horizontally */
+  align-items: center; /* Centered vertically */
+  padding: 8px; /* Padding for space around the actions */
+}
+
+/* Enhanced Hover Effect for Interactive Elements */
+.PostActions *:hover {
+  color: #2142b2; /* Change color on hover for interactivity */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
