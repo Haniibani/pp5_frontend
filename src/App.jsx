@@ -12,6 +12,7 @@ import Post from "./pages/posts/Post";
 import PostCreate from "./pages/posts/PostCreate";
 import PostEdit from "./pages/posts/PostEdit";
 import ProfilePage from "./pages/profiles/Profile";
+import NavBar from "./components/NavBar";
 
 const App = () => {
   const currentUser = useCurrentUser();
@@ -23,6 +24,7 @@ const App = () => {
   return (
     <div className={styles.App}>
       <Container className={styles.Main}>
+        <NavBar />
         <Switch>
           <Route exact path="/" render={() => <h1>Hello world</h1>} />
           <Route

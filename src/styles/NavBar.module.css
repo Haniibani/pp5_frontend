@@ -1,0 +1,29 @@
+/* Navigation Bar Styles */
+.NavBar {
+  background-color: #ffffff; /* White background for a clean look */
+  border-bottom: 2px solid #e0e0e0; /* Subtle bottom border for separation */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Light shadow for depth */
+  padding: 10px 20px; /* Padding for spacing around content */
+  display: flex; /* Flex display for horizontal alignment of nav items */
+  justify-content: space-between; /* Evenly spaces items */
+  align-items: center; /* Vertically centers items */
+}
+
+/* Navigation Link Styles */
+.NavLink {
+  padding: 10px 15px; /* Increased padding for better touch targets */
+  text-decoration: none; /* Removes underline from links */
+  color: #555555; /* Dark grey color for readability */
+  font-weight: bold; /* Bold font for prominence */
+  transition: color 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+.NavLink:hover {
+  color: #2142b2; /* Color change on hover for interactivity */
+  text-decoration: none; /* Removes underline from links */
+}
+
+/* Active Navigation Item Styling */
+.Active {
+  color: #2142b2; /* Highlight color for active icon */
+}
