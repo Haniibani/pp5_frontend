@@ -23,7 +23,7 @@ const PopularProfiles = ({ mobile }) => {
         mobile && "d-lg-none text-center mb-3"
       }`}
     >
-      <p>Most followed profiles.</p>
+      <p class="h4">Popular profiles</p>
       {mobile ? (
         <div className="d-flex justify-content-around">
           {popularProfiles.results.slice(0, 4).map((profile) => (
