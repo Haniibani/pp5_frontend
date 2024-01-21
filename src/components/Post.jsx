@@ -38,21 +38,19 @@ const Post = ({
 
   const isOwner = currentUser?.username === owner;
 
-  const handleEdit = useCallback(() =>
-    history.push(`/posts/${id}/edit`, [history, id])
+  const handleEdit = useCallback(
+    () => history.push(`/posts/${id}/edit`),
+    [history, id]
   );
 
-  const handleDelete = useCallback(
-    (async () => {
-      try {
-        await axiosRes.delete(`/posts/${id}/`);
-        history.goBack();
-      } catch (err) {
-        console.error(err);
-      }
-    },
-    [axiosRes, history])
-  );
+  const handleDelete = useCallback(async () => {
+    try {
+      await axiosRes.delete(`/posts/${id}/`);
+      history.goBack();
+    } catch (err) {
+      console.error(err);
+    }
+  }, [axiosRes, history]);
 
   return (
     <Card className={styles.Post}>

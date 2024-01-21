@@ -22,7 +22,7 @@ const EditIconButton = React.forwardRef(({ onClick }, ref) => (
 
 export const MoreDropdown = ({ handleEdit, handleDelete }) => {
   return (
-    <Dropdown className="ml-auto" drop="left">
+    <Dropdown className="ml-auto" drop="down">
       <Dropdown.Toggle as={EditIconButton} />
 
       <Dropdown.Menu
@@ -34,14 +34,14 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
           onClick={handleEdit}
           aria-label="edit"
         >
-          <i className="fas fa-edit" />
+          Edit
         </Dropdown.Item>
         <Dropdown.Item
           className={styles.DropdownItem}
           onClick={handleDelete}
           aria-label="delete"
         >
-          <i className="fas fa-trash-alt" />
+          Delete
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
