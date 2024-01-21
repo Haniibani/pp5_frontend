@@ -31,6 +31,6 @@ h5 {
 
 /* Enhanced Hover Effect for Interactive Elements */
 .PostActions *:hover {
-  color: #2142b2; /* Change color on hover for interactivity */
+  color: #84cda2; /* Change color on hover for interactivity */
   transition: color 0.3s ease; /* Smooth transition for color change */
 }

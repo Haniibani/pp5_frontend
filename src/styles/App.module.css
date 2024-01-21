@@ -49,7 +49,7 @@ a:hover {
 }
 
 a:hover i {
-  color: #2142b2; /* Hover color change for icons within links */
+  color: #84cda2; /* Hover color change for icons within links */
 }
 
 /* File Input Style */
@@ -67,7 +67,7 @@ i {
 
 i:hover {
   cursor: pointer; /* Pointer cursor on hover for interactivity */
-  color: #2142b2; /* Color change on hover */
+  color: #84cda2; /* Color change on hover */
 }
 
 /* Figure Element Style */

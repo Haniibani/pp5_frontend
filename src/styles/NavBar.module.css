@@ -19,11 +19,11 @@
 }
 
 .NavLink:hover {
-  color: #2142b2; /* Color change on hover for interactivity */
+  color: #84cda2; /* Color change on hover for interactivity */
   text-decoration: none; /* Removes underline from links */
 }
 
 /* Active Navigation Item Styling */
 .Active {
-  color: #2142b2; /* Highlight color for active icon */
+  color: #84cda2; /* Highlight color for active icon */
 }

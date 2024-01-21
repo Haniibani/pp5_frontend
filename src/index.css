@@ -5,17 +5,17 @@
 }
 
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
   background-color: #fafafa;
   color: #333;
 }
 
 a {
-  color: #385185;
+  color: #84cda2;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 a:hover {
-  color: #1e4d7d;
+  color: #84cda2;
 }
