@@ -23,7 +23,7 @@ const CommentEdit = (props) => {
         content: formContent.trim(),
       });
       setShowEditForm(false);
-      location.reload();
+      // location.reload();
     } catch (err) {
       // console.log(err);
     }
