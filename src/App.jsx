@@ -29,10 +29,9 @@ const App = () => {
       <Container className={styles.Main}>
         <NavBar />
         <Switch>
-          <Route exact path="/" render={() => <h1>Hello world</h1>} />
           <Route
             exact
-            path="/feed"
+            path="/"
             render={() => (
               <Posts
                 message="No results found. Adjust the search keyword or follow a user."
