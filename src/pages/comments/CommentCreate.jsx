@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-
 import styles from "../../styles/CommentCreateEditForm.module.css";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../clients/axios";
 
-function CommentCreateForm(props) {
-  const { post, setPost, setComments, profileImage, profile_id } = props;
+const CommentCreate = ({
+  post,
+  setPost,
+  setComments,
+  profileImage,
+  profile_id,
+}) => {
   const [content, setContent] = useState("");
 
   const handleChange = (event) => {
@@ -19,25 +22,21 @@ function CommentCreateForm(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axiosRes.post("/comments/", {
-        content,
-        post,
+      const { data } = await axiosRes.post("/comments/", { content, post });
+      setComments((prevComments) => {
+        return prevComments ? [data, ...prevComments] : [data];
       });
-      setComments((prevComments) => ({
-        ...prevComments,
-        results: [data, ...prevComments.results],
-      }));
-      setPost((prevPost) => ({
-        results: [
-          {
-            ...prevPost.results[0],
-            comments_count: prevPost.results[0].comments_count + 1,
-          },
-        ],
-      }));
+      setPost((prevPost) => {
+        return prevPost
+          ? {
+              ...prevPost,
+              comments_count: (prevPost.comments_count ?? 0) + 1,
+            }
+          : [];
+      });
       setContent("");
     } catch (err) {
-      // console.log(err);
+      console.error("Error submitting comment:", err);
     }
   };
 
@@ -67,6 +66,6 @@ function CommentCreateForm(props) {
       </button>
     </Form>
   );
-}
+};
 
-export default CommentCreateForm;
+export default CommentCreate;
