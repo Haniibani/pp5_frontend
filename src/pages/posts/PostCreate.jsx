@@ -12,8 +12,6 @@ import {
   Button,
 } from "react-bootstrap";
 
-import Asset from "../../components/Asset";
-
 import Upload from "../../assets/upload-icon.png";
 
 import { axiosReq } from "../../clients/axios";
@@ -82,20 +80,34 @@ const PostCreate = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Row>
-        <Col md={6}>
-          <Container className="d-flex flex-column justify-content-center align-items-center">
-            <Form.Group className="text-center">
+      <Row className="justify-content-md-center p-2">
+        <Col md={8} lg={6}>
+          <Container className="d-flex flex-column align-items-center">
+            <Form.Group className="text-center w-100">
               <label
                 htmlFor="image-upload"
                 className={`btn ${
-                  image ? "btn-outline-primary" : "btn-primary"
-                }`}
+                  image ? "btn-outline-light" : "btn-secondary"
+                } w-100`}
               >
-                {image ? (
-                  <Image src={image} rounded />
-                ) : (
-                  <Asset src={Upload} message="Upload an image" />
+                {image && (
+                  <Image
+                    src={image}
+                    rounded
+                    className="w-100"
+                    style={{ maxWidth: "150px", maxHeight: "150px" }}
+                  />
+                )}
+                {!image && (
+                  <div>
+                    <Image
+                      src={Upload}
+                      rounded
+                      className="w-100"
+                      style={{ maxWidth: "150px", maxHeight: "150px" }}
+                    />
+                    <p>Click to upload image!</p>
+                  </div>
                 )}
               </label>
               <Form.File
@@ -107,21 +119,18 @@ const PostCreate = () => {
               />
               {renderAlerts("image")}
             </Form.Group>
-          </Container>
-        </Col>
-        <Col md={6}>
-          <Container className="text-center">
-            <Form.Group>
+            <Form.Group className="mb-3 w-100">
               <Form.Label>Title</Form.Label>
               <Form.Control
                 type="text"
                 name="title"
                 value={title}
                 onChange={handleChange}
+                className="w-100"
               />
               {renderAlerts("title")}
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="mb-3 w-100">
               <Form.Label>Content</Form.Label>
               <Form.Control
                 as="textarea"
@@ -129,10 +138,11 @@ const PostCreate = () => {
                 name="content"
                 value={content}
                 onChange={handleChange}
+                className="w-100"
               />
               {renderAlerts("content")}
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="mb-3 w-100">
               <Form.Label>Tags</Form.Label>
               <Form.Control
                 as="select"
@@ -147,16 +157,28 @@ const PostCreate = () => {
                 ))}
               </Form.Control>
             </Form.Group>
-            <Button
-              variant="outline-primary"
-              onClick={() => history.goBack()}
-              className="btn-block"
-            >
-              Cancel
-            </Button>
-            <Button variant="primary" type="submit" className="btn-block">
-              Create
-            </Button>
+            <Container>
+              <Row className="justify-content-center p-2">
+                <Col md={12} lg={4}>
+                  <Button
+                    variant="outline"
+                    onClick={() => history.goBack()}
+                    className="btn-md btn-danger"
+                  >
+                    Cancel
+                  </Button>
+                </Col>
+                <Col md={12} lg={4}>
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    className="btn-md btn-success"
+                  >
+                    Create
+                  </Button>
+                </Col>
+              </Row>
+            </Container>
           </Container>
         </Col>
       </Row>
