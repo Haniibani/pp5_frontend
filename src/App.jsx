@@ -13,6 +13,7 @@ import PostCreate from "./pages/posts/PostCreate";
 import PostEdit from "./pages/posts/PostEdit";
 import ProfilePage from "./pages/profiles/Profile";
 import NavBar from "./components/NavBar";
+import ProfileEdit from "./pages/profiles/ProfileEdit";
 
 const App = () => {
   const currentUser = useCurrentUser();
