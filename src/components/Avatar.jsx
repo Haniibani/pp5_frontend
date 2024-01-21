@@ -16,4 +16,19 @@ const Avatar = ({ src, height = 45, text }) => {
   );
 };
 
+export const AvatarNavItem = ({ src, height = 45, text }) => {
+  return (
+    <span className={styles.AvatarContainer}>
+      <img
+        className={styles.AvatarNavItem}
+        src={src}
+        height={height}
+        width={height}
+        alt="avatar"
+      />
+      {text}
+    </span>
+  );
+};
+
 export default Avatar;
