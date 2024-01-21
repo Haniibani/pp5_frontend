@@ -13,11 +13,10 @@ import {
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import removeTokenTimestamp from "../utils/removeTokenTimestamp";
 import Notifications from "./Notifications";
-import Avatar from "./Avatar";
+import { AvatarNavItem } from "./Avatar";
 import SignIn from "../icons/SignIn";
 import SignOut from "../icons/SignOut";
 import Add from "../icons/Add";
-import Heart from "../icons/Heart";
 import House from "../icons/House";
 import SignUp from "../icons/SignUp";
 
@@ -37,7 +36,12 @@ const NavBar = () => {
   };
 
   const IconLink = ({ to, icon: Icon, children }) => (
-    <NavLink className={styles.NavLink} activeClassName={styles.Active} to={to}>
+    <NavLink
+      exact
+      className={styles.NavLink}
+      activeClassName={styles.Active}
+      to={to}
+    >
       <span className={styles.IconLink}>
         <Icon />
         <span className={styles.IconText}>{children}</span>
@@ -65,7 +69,7 @@ const NavBar = () => {
         />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-left">
-            <IconLink to="/feed" icon={House}>
+            <IconLink to="/" icon={House}>
               Home
             </IconLink>
             {currentUser ? (
@@ -73,16 +77,13 @@ const NavBar = () => {
                 <IconLink to="/posts/create" icon={Add}>
                   Add
                 </IconLink>
-                <IconLink to="/liked" icon={Heart}>
-                  Liked
-                </IconLink>
-
                 <Notifications />
                 <NavLink
                   className={styles.NavLink}
                   to={`/profiles/${currentUser?.profile_id}`}
                 >
-                  <Avatar
+                  <AvatarNavItem
+                    shouldFlex
                     src={currentUser?.profile_image}
                     text="Profile"
                     height={16}
