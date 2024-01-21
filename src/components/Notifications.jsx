@@ -36,12 +36,13 @@ const Notifications = () => {
           axiosReq.patch(`/notifications/${notification.id}`, formData)
         )
       );
+      setUnreadNotifications([]);
       fetchData();
     } catch (err) {
       console.error(err);
       // Handle error
     }
-  }, [unreadNotifications, fetchData]);
+  }, [setUnreadNotifications, unreadNotifications, fetchData]);
 
   return (
     <Dropdown
