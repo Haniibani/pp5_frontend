@@ -27,3 +27,13 @@
 .Active {
   color: #84cda2; /* Highlight color for active icon */
 }
+
+.IconLink {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.IconText {
+  margin-left: 1px;
+}

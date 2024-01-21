@@ -1,23 +1,29 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import logo from "../assets/logo.png";
 import styles from "../styles/NavBar.module.css";
-import { NavLink } from "react-router-dom";
 import {
   useCurrentUser,
   useSetCurrentUser,
 } from "../contexts/CurrentUserContext";
-import Avatar from "./Avatar";
-import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import removeTokenTimestamp from "../utils/removeTokenTimestamp";
+import Notifications from "./Notifications";
+import Avatar from "./Avatar";
+import SignIn from "../icons/SignIn";
+import SignOut from "../icons/SignOut";
+import Add from "../icons/Add";
+import Heart from "../icons/Heart";
+import House from "../icons/House";
+import SignUp from "../icons/SignUp";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
-
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
   const handleSignOut = async () => {
@@ -26,69 +32,17 @@ const NavBar = () => {
       setCurrentUser(null);
       removeTokenTimestamp();
     } catch (err) {
-      console.error("Error during sign out: ", err); // Improved error handling
+      console.error("Error during sign out:", err);
     }
   };
 
-  const loggedInIcons = (
-    <>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/posts/create"
-      >
-        <i className="far fa-plus-square"></i>Add post
-      </NavLink>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/feed"
-      >
-        <i className="fas fa-stream"></i>Feed
-      </NavLink>
-
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/liked"
-      >
-        <i className="fas fa-heart"></i>Liked
-      </NavLink>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/notifications"
-      >
-        <i className="fas fa-stream"></i>Notifications
-      </NavLink>
-      <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
-        <i className="fas fa-sign-out-alt"></i>Sign out
-      </NavLink>
-      <NavLink
-        className={styles.NavLink}
-        to={`/profiles/${currentUser?.profile_id}`}
-      >
-        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
-      </NavLink>
-    </>
-  );
-  const loggedOutIcons = (
-    <>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/signin"
-      >
-        <i className="fas fa-sign-in-alt"></i>Sign in
-      </NavLink>
-      <NavLink
-        to="/signup"
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-      >
-        <i className="fas fa-user-plus"></i>Sign up
-      </NavLink>
-    </>
+  const IconLink = ({ to, icon: Icon, children }) => (
+    <NavLink className={styles.NavLink} activeClassName={styles.Active} to={to}>
+      <span className={styles.IconLink}>
+        <Icon />
+        <span className={styles.IconText}>{children}</span>
+      </span>
+    </NavLink>
   );
 
   return (
@@ -111,16 +65,50 @@ const NavBar = () => {
         />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-left">
-            <NavLink
-              exact
-              className={styles.NavLink}
-              activeClassName={styles.Active}
-              to="/"
-            >
-              <i className="fas fa-home"></i>Home
-            </NavLink>
+            <IconLink to="/feed" icon={House}>
+              Home
+            </IconLink>
+            {currentUser ? (
+              <>
+                <IconLink to="/posts/create" icon={Add}>
+                  Add
+                </IconLink>
+                <IconLink to="/liked" icon={Heart}>
+                  Liked
+                </IconLink>
 
-            {currentUser ? loggedInIcons : loggedOutIcons}
+                <Notifications />
+                <NavLink
+                  className={styles.NavLink}
+                  to={`/profiles/${currentUser?.profile_id}`}
+                >
+                  <Avatar
+                    src={currentUser?.profile_image}
+                    text="Profile"
+                    height={16}
+                  />
+                </NavLink>
+                <NavLink
+                  className={styles.NavLink}
+                  to="/"
+                  onClick={handleSignOut}
+                >
+                  <span className={styles.IconLink}>
+                    <SignOut />
+                    <span className={styles.IconText}>Sign out</span>
+                  </span>
+                </NavLink>
+              </>
+            ) : (
+              <>
+                <IconLink to="/signin" icon={SignIn}>
+                  Sign in
+                </IconLink>
+                <IconLink to="/signup" icon={SignUp}>
+                  Sign up
+                </IconLink>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
