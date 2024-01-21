@@ -3,7 +3,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Heart from "../icons/Heart";
 import HeartOutlined from "../icons/HeartOutlined";
 import { axiosRes } from "../clients/axios";
-import styles from "../styles/LikeButton.module.css"; // Assuming you have a CSS module for styles
+import styles from "../styles/Button.module.css"; // Assuming you have a CSS module for styles
 
 const LikeButton = ({ isOwner, likeId, setPosts, postId }) => {
   const updateLikes = useCallback(
@@ -44,7 +44,7 @@ const LikeButton = ({ isOwner, likeId, setPosts, postId }) => {
         placement="top"
         overlay={<Tooltip>You can't like your own post!</Tooltip>}
       >
-        <span className={styles.likeButton}>
+        <span className={styles.Cursor}>
           <HeartOutlined />
         </span>
       </OverlayTrigger>
