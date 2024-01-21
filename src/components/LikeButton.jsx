@@ -36,7 +36,7 @@ const LikeButton = ({ isOwner, likeId, setPosts, postId }) => {
     } catch (err) {
       console.error(err);
     }
-  }, [likeId, postId, axiosRes, updateLikes]);
+  }, [likeId, postId, updateLikes]);
 
   if (isOwner) {
     return (
