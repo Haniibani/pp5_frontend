@@ -18,6 +18,8 @@ import btnStyles from "../../styles/Button.module.css";
 
 import { axiosReq } from "../../clients/axios";
 
+import tags from "../../constants/tags";
+
 const PostEdit = () => {
   const [errors, setErrors] = useState({});
 
@@ -25,8 +27,9 @@ const PostEdit = () => {
     title: "",
     content: "",
     image: "",
+    tag: "",
   });
-  const { title, content, image } = postData;
+  const { title, content, image, tag } = postData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -36,9 +39,11 @@ const PostEdit = () => {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/posts/${id}/`);
-        const { title, content, image, is_owner } = data;
+        const { title, content, image, tag, is_owner } = data;
 
-        is_owner ? setPostData({ title, content, image }) : history.push("/");
+        is_owner
+          ? setPostData({ title, content, image, tag })
+          : history.push("/");
       } catch (err) {
         // console.log(err);
       }
@@ -70,6 +75,7 @@ const PostEdit = () => {
 
     formData.append("title", title);
     formData.append("content", content);
+    formData.append("tag", tag);
 
     if (imageInput?.current?.files[0]) {
       formData.append("image", imageInput.current.files[0]);
@@ -114,6 +120,26 @@ const PostEdit = () => {
         />
       </Form.Group>
       {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+      <Form.Group>
+        <Form.Label>Tag</Form.Label>
+        <Form.Control
+          as="select"
+          name="tag"
+          value={tag}
+          onChange={handleChange}
+        >
+          {tags.map((tag) => (
+            <option key={tag.id} value={tag.name}>
+              {tag.name}
+            </option>
+          ))}
+        </Form.Control>
+      </Form.Group>
+      {errors?.tag?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
