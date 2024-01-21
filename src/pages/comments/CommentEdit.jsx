@@ -1,72 +1,63 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-
-import styles from "../../styles/CommentCreateEditForm.module.css";
-import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../clients/axios";
 
-const CommentCreate = (props) => {
-  const { post, setPost, setComments, profileImage, profile_id } = props;
-  const [content, setContent] = useState("");
+import styles from "../../styles/CommentCreateEditForm.module.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
+const CommentEdit = (props) => {
+  const history = useHistory();
+  const { id, content, setShowEditForm } = props;
+
+  const [formContent, setFormContent] = useState(content);
 
   const handleChange = (event) => {
-    setContent(event.target.value);
+    setFormContent(event.target.value);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axiosRes.post("/comments/", {
-        content,
-        post,
+      await axiosRes.put(`/comments/${id}/`, {
+        content: formContent.trim(),
       });
-      setComments((prevComments) => ({
-        ...prevComments,
-        results: [data, ...prevComments.results],
-      }));
-      setPost((prevPost) => ({
-        results: [
-          {
-            ...prevPost.results[0],
-            comments_count: prevPost.results[0].comments_count + 1,
-          },
-        ],
-      }));
-      setContent("");
+      setShowEditForm(false);
+      location.reload();
     } catch (err) {
       // console.log(err);
     }
   };
 
   return (
-    <Form className="mt-2" onSubmit={handleSubmit}>
-      <Form.Group>
-        <InputGroup>
-          <Link to={`/profiles/${profile_id}`}>
-            <Avatar src={profileImage} />
-          </Link>
-          <Form.Control
-            className={styles.Form}
-            placeholder="my comment..."
-            as="textarea"
-            value={content}
-            onChange={handleChange}
-            rows={2}
-          />
-        </InputGroup>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group className="pr-1">
+        <Form.Control
+          className={styles.Form}
+          as="textarea"
+          value={formContent}
+          onChange={handleChange}
+          rows={2}
+        />
       </Form.Group>
-      <button
-        className={`${styles.Button} btn d-block ml-auto`}
-        disabled={!content.trim()}
-        type="submit"
-      >
-        post
-      </button>
+      <div className="text-right">
+        <button
+          className={styles.Button}
+          onClick={() => setShowEditForm(false)}
+          type="button"
+        >
+          cancel
+        </button>
+        <button
+          className={styles.Button}
+          disabled={!content.trim()}
+          type="submit"
+        >
+          save
+        </button>
+      </div>
     </Form>
   );
-}
+};
 
-export default CommentCreate;
+export default CommentEdit;
