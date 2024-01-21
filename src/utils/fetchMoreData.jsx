@@ -1,3 +1,5 @@
+import { axiosReq } from "../clients/axios";
+
 const fetchMoreData = async (resource, setResource) => {
   try {
     // Fetch data from the 'next' URL

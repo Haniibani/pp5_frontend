@@ -18,6 +18,8 @@ import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 import useRedirect from "../../hooks/useRedirect";
 
+import setTokenTimestamp from "../../utils/setTokenTimestamp"
+
 const SignIn = () => {
   const setCurrentUser = useSetCurrentUser();
   useRedirect("loggedIn");
