@@ -1,82 +1,91 @@
+/* Main Application Styles */
 .App {
-    font-family: "DM Sans", sans-serif;
-    background-color: #f8f8f8;
-    min-height: 100vh;
-  }
-  
-  .Main {
-    padding-top: 81px;
-  }
-  
-  .Content {
-    background-color: #ffffff;
-    padding: 10px;
-    border-radius: 2px;
-    border: 1px solid #dadadf;
-  }
-  
-  .FillerImage {
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
-  }
-  
-  .Image {
-    max-height: 40vh;
-    max-width: 100%;
-    object-fit: contain;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
-  
-  a {
-    color: #555555;
-    transition: color ease-in-out 0.3s;
-  }
-  
-  a:hover {
-    text-decoration: none;
-  }
-  
-  a:hover i {
-    color: #2142b2;
-    transition: color ease-in-out 0.3s;
-  }
-  
-  input[type="file"] {
-    display: none;
-  }
-  
-  i {
-    color: #cfced3;
-    font-size: 1.6rem;
-    padding: 7px;
-    vertical-align: middle;
-  }
-  
-  i:hover {
-    cursor: pointer;
-    transition: color ease-in-out 0.3s;
-    color: #2142b2;
-  }
-  
-  figure {
-    text-align: center;
-    display: inline-block;
-  }
-  
-  /* scrollbar */
-  *::-webkit-scrollbar {
-    width: 5px;
-  }
-  *::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  *::-webkit-scrollbar-thumb {
-    background: #888;
-  }
-  *::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+  font-family: "DM Sans", sans-serif; /* Modern font for overall app */
+  background-color: #f8f8f8; /* Light grey background for better readability */
+  min-height: 100vh; /* Ensures the app fills the full viewport height */
+}
+
+/* Primary Content Area */
+.Main {
+  padding-top: 81px; /* Adds spacing to the top of the main content */
+}
+
+/* Content Section Styling */
+.Content {
+  background-color: #ffffff; /* White background for content sections */
+  padding: 20px; /* Increased padding for better spacing */
+  border-radius: 8px; /* Rounded corners for a modern look */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Filler Image Styles */
+.FillerImage {
+  object-fit: cover; /* Ensures images cover the element completely */
+  height: 100%; /* Full height */
+  width: 100%; /* Full width */
+}
+
+/* Image Style Adjustments */
+.Image {
+  max-height: 40vh; /* Maximum height of images */
+  max-width: 100%; /* Full width within container */
+  object-fit: contain; /* Ensures the image is fully visible */
+}
+
+/* Global Box Model */
+* {
+  box-sizing: border-box; /* Consistent box sizing model */
+  min-width: 0;
+}
+
+/* Link Styles */
+a {
+  color: #555555; /* Darker grey for readability */
+  transition: color 0.3s ease-in-out; /* Smooth color transition for hover */
+}
+
+a:hover {
+  text-decoration: underline; /* Underline on hover for clear interactivity */
+}
+
+a:hover i {
+  color: #2142b2; /* Hover color change for icons within links */
+}
+
+/* File Input Style */
+input[type="file"] {
+  display: none; /* Hide default file input */
+}
+
+/* Icon Styling */
+i {
+  color: #cfced3; /* Neutral color for icons */
+  font-size: 1.6rem; /* Slightly larger icon size */
+  padding: 7px; /* Padding for clickable area */
+  vertical-align: middle; /* Aligns icons with adjacent text */
+}
+
+i:hover {
+  cursor: pointer; /* Pointer cursor on hover for interactivity */
+  color: #2142b2; /* Color change on hover */
+}
+
+/* Figure Element Style */
+figure {
+  text-align: center; /* Center-align content within figure */
+  display: inline-block; /* Inline-block for layout flexibility */
+}
+
+/* Custom Scrollbar Styles */
+*::-webkit-scrollbar {
+  width: 5px; /* Narrow scrollbar width */
+}
+*::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light track background */
+}
+*::-webkit-scrollbar-thumb {
+  background: #888; /* Neutral thumb color */
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker thumb on hover */
+}

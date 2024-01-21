@@ -16,3 +16,9 @@
   cursor: default;
   color: #cfced3;
 }
+
+/* Styles for the scrollable posts container */
+.ScrollablePostsContainer {
+  height: calc(100vh - 60px); /* Adjust 60px based on the height of your fixed elements */
+  overflow-y: auto;
+}
