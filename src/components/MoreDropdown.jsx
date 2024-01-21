@@ -1,25 +1,29 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
+import btnStyles from "../styles/Button.module.css";
 import { useHistory } from "react-router";
+import Edit from "../icons/Edit";
 
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
-const ThreeDots = React.forwardRef(({ onClick }, ref) => (
-  <i
-    className="fas fa-ellipsis-v"
+const EditIconButton = React.forwardRef(({ onClick }, ref) => (
+  <span
     ref={ref}
+    className={btnStyles.Cursor}
     onClick={(e) => {
       e.preventDefault();
       onClick(e);
     }}
-  />
+  >
+    <Edit />
+  </span>
 ));
 
 export const MoreDropdown = ({ handleEdit, handleDelete }) => {
   return (
     <Dropdown className="ml-auto" drop="left">
-      <Dropdown.Toggle as={ThreeDots} />
+      <Dropdown.Toggle as={EditIconButton} />
 
       <Dropdown.Menu
         className="text-center"
@@ -46,9 +50,10 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
 
 export const ProfileEditDropdown = ({ id }) => {
   const history = useHistory();
+
   return (
     <Dropdown className={`ml-auto px-3 ${styles.Absolute}`} drop="left">
-      <Dropdown.Toggle as={ThreeDots} />
+      <Dropdown.Toggle as={EditIconButton} />
       <Dropdown.Menu>
         <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/edit`)}
