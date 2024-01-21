@@ -29,6 +29,7 @@ const PostCreate = () => {
     image: "",
     tags: [],
   });
+
   const { title, content, image, tags: selectedTags } = postData;
   const imageInput = useRef(null);
   const history = useHistory();
@@ -39,7 +40,7 @@ const PostCreate = () => {
   const handleTagsChange = ({ target: { options } }) => {
     const selectedOptions = Array.from(options)
       .filter((option) => option.selected)
-      .map((option) => parseInt(option.value));
+      .map((option) => option.value);
     setPostData((prevState) => ({ ...prevState, tags: selectedOptions }));
   };
 
@@ -59,7 +60,7 @@ const PostCreate = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("image", imageInput.current.files[0]);
-    formData.append("tags", selectedTags.join(","));
+    formData.append("tags", selectedTags);
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
@@ -151,7 +152,7 @@ const PostCreate = () => {
                 onChange={handleTagsChange}
               >
                 {tags.map((tag) => (
-                  <option key={tag.id} value={tag.id}>
+                  <option key={tag.id} value={tag.name}>
                     {tag.name}
                   </option>
                 ))}
