@@ -74,7 +74,7 @@ const Post = ({
         <Link to={`/posts/${id}`}>
           <div className={styles.ImageWrapper}>
             <Card.Img src={image} alt={title} />
-            <div className={styles.Tag}>{tag}</div>
+           {tag && <div className={styles.Tag}>{tag}</div>}
           </div>
         </Link>
         <hr class="hr" />
