@@ -31,6 +31,7 @@ const Post = ({
   updated_at,
   postPage,
   setPosts,
+  tag,
 }) => {
   const history = useHistory();
   const currentUser = useCurrentUser();
@@ -73,7 +74,10 @@ const Post = ({
         </Media>
         <hr class="hr" />
         <Link to={`/posts/${id}`}>
-          <Card.Img src={image} alt={title} />
+          <div className={styles.ImageWrapper}>
+            <Card.Img src={image} alt={title} />
+            <div className={styles.Tag}>{tag}</div>
+          </div>
         </Link>
         <hr class="hr" />
         {title && <Card.Title className="text-center">{title}</Card.Title>}

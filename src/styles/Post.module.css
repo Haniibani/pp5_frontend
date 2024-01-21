@@ -34,3 +34,18 @@ h5 {
   color: #84cda2; /* Change color on hover for interactivity */
   transition: color 0.3s ease; /* Smooth transition for color change */
 }
+
+.ImageWrapper {
+  position: relative;
+}
+
+.Tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #84cda2;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 0.8em;
+}
