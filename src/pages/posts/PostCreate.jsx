@@ -27,22 +27,15 @@ const PostCreate = () => {
     title: "",
     content: "",
     image: "",
-    tags: [],
+    tag: "",
   });
 
-  const { title, content, image, tags: selectedTags } = postData;
+  const { title, content, image, tag } = postData;
   const imageInput = useRef(null);
   const history = useHistory();
 
   const handleChange = ({ target: { name, value } }) =>
     setPostData((prevState) => ({ ...prevState, [name]: value }));
-
-  const handleTagsChange = ({ target: { options } }) => {
-    const selectedOptions = Array.from(options)
-      .filter((option) => option.selected)
-      .map((option) => option.value);
-    setPostData((prevState) => ({ ...prevState, tags: selectedOptions }));
-  };
 
   const handleChangeImage = ({ target: { files } }) => {
     if (files.length) {
@@ -60,7 +53,7 @@ const PostCreate = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("image", imageInput.current.files[0]);
-    formData.append("tags", selectedTags);
+    formData.append("tag", tag);
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
@@ -144,13 +137,8 @@ const PostCreate = () => {
               {renderAlerts("content")}
             </Form.Group>
             <Form.Group className="mb-3 w-100">
-              <Form.Label>Tags</Form.Label>
-              <Form.Control
-                as="select"
-                multiple
-                value={selectedTags}
-                onChange={handleTagsChange}
-              >
+              <Form.Label>Tag</Form.Label>
+              <Form.Control as="select" value={tag} onChange={handleChange}>
                 {tags.map((tag) => (
                   <option key={tag.id} value={tag.name}>
                     {tag.name}
