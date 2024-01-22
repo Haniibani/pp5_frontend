@@ -24,6 +24,7 @@ Caption of the Day is a social media platform where users engage through shared 
 * [Testing](#testing)
   * [Manual Testing](#manual-testing)
   * [Automated Testing](#automated-testing)
+  * [Performance and Best Practices Analysis](#performance-and-best-practices-analysis)
   * [Known Bugs](#known-bugs)
 * [Deployment](#deployment)
   * [Heroku](#heroku)
@@ -89,14 +90,9 @@ By focusing on these goals, Caption of the Day aims to establish itself as a pre
    - As a user, I want a visually appealing color scheme and consistent design across the platform.
    - As a user, I want a fast and responsive application for a smooth browsing experience.
 
-6. **System Functionality & Performance**
-   - As a developer, I want up-to-date dependencies for a secure and efficient application.
-   - As a developer, I want to fix any missing imports and incorrect logic for uninterrupted application functionality.
-
-7. **Error Handling & System Reliability**
+6. **Error Handling & System Reliability**
    - As a user, I want the application to handle errors gracefully so that I can continue using the platform without confusion.
    - As a user, I want to easily see my login status and have access token refresh for secure and continuous access.
-
 
 ### Design Choices
 
@@ -139,7 +135,6 @@ Looking ahead, Caption of the Day is excited to explore and develop additional f
 - **Eco-Friendly Initiatives**: Introduce features that promote environmental awareness, including eco-challenges and sustainability-focused content sharing.
 
 These prospective features aim to keep Caption of the Day at the forefront of innovation, providing users with an ever-evolving platform that not only entertains but also connects and inspires.
-
 
 ## Packages and Tools
 
@@ -197,6 +192,24 @@ To ensure the highest quality and functionality, the project includes comprehens
 - **Continuous Integration**: Integrated these tests into a CI/CD pipeline, ensuring that every build is automatically tested before deployment.
 - **Outcome**: Automated testing has significantly increased the reliability of the application, reducing the chances of regressions and bugs in production.
 
+### Performance and Best Practices Analysis
+
+As part of our commitment to excellence, I conducted an in-depth performance and best practices analysis using Lighthouse. My analysis revealed several insights:
+
+![Lighthouse report](src\assets\Performance.png)
+
+- **Performance (51/100)**: This score prompted me to look into optimization opportunities. I'm currently focusing on improving the Time to Interactive and Speed Index by optimizing images and reducing JavaScript size for a faster, more responsive experience.
+
+- **Accessibility (88/100)**: I'm proud of our high score, which reflects our dedication to inclusivity. However, I'm taking steps to improve color contrast ratios and ARIA attributes to push the score even closer to perfection.
+
+- **Best Practices (96/100)**: This near-perfect score is encouraging. It validates our adherence to modern coding standards and security practices, which are foundational to the reliability of Caption of the Day.
+
+- **SEO (100/100)**: A perfect score here confirms that our platform is well-prepared for discoverability, with proper meta tags and structured data in place.
+
+- **PWA (51/100)**: This area represents a significant growth opportunity. I'm exploring enhancements in our app's installability and offline capabilities to provide a more app-like experience on mobile devices.
+
+Incorporating these findings, I'm implementing targeted improvements to ensure our users enjoy the most seamless and engaging experience possible.
+
 ### Known Bugs
 
 - **Current Status**: As of the latest deployment, no major bugs have been reported. The application is monitored continuously for any anomalies.
@@ -207,24 +220,29 @@ To ensure the highest quality and functionality, the project includes comprehens
 ## Deployment
 
 ### Heroku
+
 This project is deployed on Heroku, a cloud platform service that enables easy deployment and scaling for web applications. The deployment process includes the following steps:
 
 #### Initial Setup
+
 1. **Create a Heroku Account**: Sign up for a Heroku account at [Heroku's website](https://www.heroku.com/).
 2. **Install Heroku CLI**: Download and install the Heroku Command Line Interface (CLI) to interact with Heroku from your local machine.
 
 #### Preparing the Application
+
 1. **Procfile**: Create a `Procfile` in your project root directory. This file tells Heroku how to run your application.
 2. **Requirements.txt**: Ensure you have a `requirements.txt` file listing all project dependencies.
 3. **Config Vars**: Set up necessary configuration variables in Heroku (like `SECRET_KEY`, database URL, etc.).
 
 #### Deployment
+
 1. **Create a Heroku App**: Use the Heroku CLI to create a new app.
 2. **Add Buildpacks**: If necessary, add the correct buildpacks via the Heroku dashboard or CLI.
 3. **Deploy**: Push your code to Heroku either by connecting your GitHub repository to Heroku or using the Heroku CLI to deploy your application.
 4. **Database Migration (if applicable)**: Run database migrations using the Heroku CLI.
 
 #### Final Steps
+
 1. **Enable the Web Dyno**: Make sure the web dyno is up and running after deployment.
 2. **Open the App**: You can open your application from the Heroku dashboard or using the CLI command `heroku open`.
 
