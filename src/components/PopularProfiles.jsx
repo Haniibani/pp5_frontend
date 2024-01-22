@@ -22,7 +22,7 @@ const PopularProfiles = ({ mobile }) => {
       className={`${appStyles.Content} ${mobile && "d-lg-none text-center mb-3"
         }`}
     >
-      <p class="h4">Popular profiles</p>
+      <p clasName="h4">Popular profiles</p>
       {mobile ? (
         <div className="d-flex justify-content-around">
           {popularProfiles.results.slice(0, 4).map((profile) => (
