@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 
 import Form from "react-bootstrap/Form";
+
 import { axiosRes } from "../../clients/axios";
 
 import styles from "../../styles/CommentCreateEditForm.module.css";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const CommentEdit = (props) => {
-  const history = useHistory();
   const { id, content, setShowEditForm } = props;
 
   const [formContent, setFormContent] = useState(content);
@@ -23,9 +22,9 @@ const CommentEdit = (props) => {
         content: formContent.trim(),
       });
       setShowEditForm(false);
-      // location.reload();
+      window.location.reload();
     } catch (err) {
-      // console.log(err);
+      // Handle error
     }
   };
 

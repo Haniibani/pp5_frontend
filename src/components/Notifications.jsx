@@ -1,8 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
+
 import { useParams } from "react-router-dom";
+
 import { axiosReq } from "../clients/axios";
+
 import styles from "../styles/NavBar.module.css";
+
 import Dropdown from "./Dropdown";
+
 import Bell from "../icons/Bell";
 
 const Notifications = () => {
@@ -18,10 +23,9 @@ const Notifications = () => {
         data.results.filter((notification) => !notification.read)
       );
     } catch (err) {
-      console.error(err);
       // Handle error
     }
-  }, []);
+  }, [setNotifications, setUnreadNotifications]);
 
   useEffect(() => {
     fetchData();

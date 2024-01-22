@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
+
 import { useParams } from "react-router";
+
 import { Col, Row, Container } from "react-bootstrap";
+
 import PopularProfiles from "../../components/PopularProfiles";
+
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import {
   useProfileData,
   useSetProfileData,
 } from "../../contexts/ProfileDataContext";
+
 import { axiosReq } from "../../clients/axios";
+
 import ProfileInformation from "../../components/ProfileInformation";
 import ProfilePosts from "../../components/ProfilePosts";
 import Asset from "../../components/Asset";
+
 import appStyles from "../../styles/App.module.css";
 
 const Profile = () => {

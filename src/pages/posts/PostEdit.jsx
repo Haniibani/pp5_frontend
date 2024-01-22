@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { useHistory, useParams } from "react-router";
 
@@ -52,45 +52,54 @@ const PostEdit = () => {
     handleMount();
   }, [history, id]);
 
-  const handleChange = (event) => {
-    setPostData({
-      ...postData,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  const handleChangeImage = (event) => {
-    if (event.target.files.length) {
-      URL.revokeObjectURL(image);
+  const handleChange = useCallback(
+    (event) => {
       setPostData({
         ...postData,
-        image: URL.createObjectURL(event.target.files[0]),
+        [event.target.name]: event.target.value,
       });
-    }
-  };
+    },
+    [postData]
+  );
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("tag", tag);
-
-    if (imageInput?.current?.files[0]) {
-      formData.append("image", imageInput.current.files[0]);
-    }
-
-    try {
-      await axiosReq.put(`/posts/${id}/`, formData);
-      history.push(`/posts/${id}`);
-    } catch (err) {
-      // console.log(err);
-      if (err.response?.status !== 401) {
-        setErrors(err.response?.data);
+  const handleChangeImage = useCallback(
+    (event) => {
+      if (event.target.files.length) {
+        URL.revokeObjectURL(image);
+        setPostData({
+          ...postData,
+          image: URL.createObjectURL(event.target.files[0]),
+        });
       }
-    }
-  };
+    },
+    [image, postData]
+  );
+
+  const handleSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
+      const formData = new FormData();
+
+      formData.append("title", title);
+      formData.append("content", content);
+      formData.append("tag", tag);
+
+      if (imageInput?.current?.files[0]) {
+        formData.append("image", imageInput.current.files[0]);
+      }
+
+      try {
+        await axiosReq.put(`/posts/${id}/`, formData);
+        history.push(`/posts/${id}`);
+      } catch (err) {
+        // console.log(err);
+        if (err.response?.status !== 401) {
+          setErrors(err.response?.data);
+        }
+      }
+    },
+    [content, history, id, tag, title]
+  );
 
   const textFields = (
     <div className="text-center">

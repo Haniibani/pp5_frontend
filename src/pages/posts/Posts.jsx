@@ -13,13 +13,17 @@ import styles from "../../styles/PostsPage.module.css";
 import { useLocation } from "react-router";
 import { axiosReq } from "../../clients/axios";
 
-import NoResults from "../../assets/upload-icon.png";
+import NoResults from "../../assets/NotFound.png";
 import InfiniteScroll from "react-infinite-scroll-component";
 import fetchMoreData from "../../utils/fetchMoreData";
 import PopularProfiles from "../../components/PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import FilterFeed from "../../components/FilterFeed";
 
-const Posts = ({ message, filter = "" }) => {
+const MESSAGE = "No results found. Adjust the search keyword or filter.";
+
+const Posts = () => {
+  const [filter, setFilter] = useState("");
   const [posts, setPosts] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
@@ -31,11 +35,13 @@ const Posts = ({ message, filter = "" }) => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const { data } = await axiosReq.get(`/posts/?${filter}search=${query}`);
+        const { data } = await axiosReq.get(
+          `/posts/?${filter}&search=${query}`
+        );
         setPosts(data);
         setHasLoaded(true);
       } catch (err) {
-        // console.log(err);
+        // Handle error
       }
     };
 
@@ -53,7 +59,7 @@ const Posts = ({ message, filter = "" }) => {
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <PopularProfiles mobile />
-        <i className={`fas fa-search ${styles.SearchIcon}`} />
+        <FilterFeed mobile setFilter={setFilter} />
         <Form
           className={styles.SearchBar}
           onSubmit={(event) => event.preventDefault()}
@@ -81,7 +87,7 @@ const Posts = ({ message, filter = "" }) => {
               />
             ) : (
               <Container className={appStyles.Content}>
-                <Asset src={NoResults} message={message} />
+                <Asset src={NoResults} message={MESSAGE} />
               </Container>
             )}
           </>
@@ -92,6 +98,7 @@ const Posts = ({ message, filter = "" }) => {
         )}
       </Col>
       <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
+        <FilterFeed setFilter={setFilter} />
         <PopularProfiles />
       </Col>
     </Row>

@@ -6,15 +6,15 @@ import { Card, Media } from "react-bootstrap";
 
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 
-import Avatar from "../components/Avatar";
-import { MoreDropdown } from "../components/MoreDropdown";
+import { axiosRes } from "../clients/axios";
+
+import Avatar from "./Avatar";
+import { MoreDropdown } from "./MoreDropdown";
+import LikeButton from "./LikeButton";
 
 import styles from "../styles/Post.module.css";
 
-import { axiosRes } from "../clients/axios";
-
 import Chat from "../icons/Chat";
-import LikeButton from "./LikeButton";
 import Quote from "../icons/Quote";
 
 const Post = ({
@@ -50,7 +50,7 @@ const Post = ({
     } catch (err) {
       console.error(err);
     }
-  }, [axiosRes, history]);
+  }, [history, id]);
 
   return (
     <Card className={styles.Post}>
@@ -74,7 +74,7 @@ const Post = ({
         <Link to={`/posts/${id}`}>
           <div className={styles.ImageWrapper}>
             <Card.Img src={image} alt={title} />
-           {tag && <div className={styles.Tag}>{tag}</div>}
+            {tag && <div className={styles.Tag}>{tag}</div>}
           </div>
         </Link>
         <hr class="hr" />

@@ -1,5 +1,7 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+
 import axios from "axios";
+
 import { useHistory } from "react-router";
 
 import { axiosReq, axiosRes } from "../clients/axios";
@@ -17,7 +19,6 @@ export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const history = useHistory();
 
-  // Fetch user data on component mount
   useEffect(() => {
     const handleMount = async () => {
       try {
@@ -31,7 +32,17 @@ export const CurrentUserProvider = ({ children }) => {
     handleMount();
   }, []);
 
-  // Add interceptors for token refresh and handling 401 errors
+  const handleTokenRefreshError = useCallback((err) => {
+    setCurrentUser((prevCurrentUser) => {
+      if (prevCurrentUser) {
+        history.push("/signin");
+      }
+      return null;
+    });
+    removeTokenTimestamp();
+    console.error("Token refresh error:", err);
+  }, [history]);
+
   useMemo(() => {
     axiosReq.interceptors.request.use(
       async (config) => {
@@ -63,19 +74,8 @@ export const CurrentUserProvider = ({ children }) => {
         return Promise.reject(err);
       }
     );
-  }, []);
+  }, [handleTokenRefreshError]);
 
-  // Function to handle token refresh error
-  const handleTokenRefreshError = (err) => {
-    setCurrentUser((prevCurrentUser) => {
-      if (prevCurrentUser) {
-        history.push("/signin");
-      }
-      return null;
-    });
-    removeTokenTimestamp();
-    console.error("Token refresh error:", err);
-  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

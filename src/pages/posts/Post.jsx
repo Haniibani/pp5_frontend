@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
+
 import { useParams } from "react-router";
+
 import InfiniteScroll from "react-infinite-scroll-component";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
+
+import { Col, Row, Container } from "react-bootstrap";
 
 import { axiosReq } from "../../clients/axios";
+
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+
 import fetchMoreData from "../../utils/fetchMoreData";
+import isEmpty from "../../utils/isEmpty";
 
 import PostComp from "../../components/Post";
 import Comment from "../../components/Comment";
@@ -16,7 +20,6 @@ import PopularProfiles from "../../components/PopularProfiles";
 import Asset from "../../components/Asset";
 
 import appStyles from "../../styles/App.module.css";
-import isEmpty from "../../utils/isEmpty";
 
 const Post = () => {
   const { id } = useParams();
