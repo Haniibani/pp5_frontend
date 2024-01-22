@@ -2,6 +2,7 @@
   "name": "caption-of-the-day",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^11.2.7",
@@ -30,6 +31,9 @@
       "react-app/jest"
     ]
   },
+  "jest": {
+    "transformIgnorePatterns": []
+  },  
   "browserslist": {
     "production": [
       ">0.2%",
