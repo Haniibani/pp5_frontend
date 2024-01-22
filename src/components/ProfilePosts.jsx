@@ -1,8 +1,12 @@
 import React from "react";
+
 import InfiniteScroll from "react-infinite-scroll-component";
+
 import Post from "../components/Post";
 import Asset from "../components/Asset";
+
 import fetchMoreData from "../utils/fetchMoreData";
+
 import NoResults from "../assets/NotFound.png";
 
 const ProfilePosts = ({ profilePosts, setProfilePosts }) => (

@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useCallback } from "react";
+
 import { NavLink } from "react-router-dom";
+
 import axios from "axios";
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
+
+import { Navbar, Container, Nav } from "react-bootstrap";
+
 import logo from "../assets/logo.png";
+
 import styles from "../styles/NavBar.module.css";
+
 import {
   useCurrentUser,
   useSetCurrentUser,
 } from "../contexts/CurrentUserContext";
+
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
+
 import removeTokenTimestamp from "../utils/removeTokenTimestamp";
+
 import Notifications from "./Notifications";
 import { AvatarNavItem } from "./Avatar";
+
 import SignIn from "../icons/SignIn";
 import SignOut from "../icons/SignOut";
 import Add from "../icons/Add";
@@ -25,15 +33,15 @@ const NavBar = () => {
   const setCurrentUser = useSetCurrentUser();
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
-  const handleSignOut = async () => {
+  const handleSignOut = useCallback(async () => {
     try {
       await axios.post("dj-rest-auth/logout/");
       setCurrentUser(null);
       removeTokenTimestamp();
     } catch (err) {
-      console.error("Error during sign out:", err);
+      // Handle error
     }
-  };
+  }, [setCurrentUser ]);
 
   const IconLink = ({ to, icon: Icon, children }) => (
     <NavLink

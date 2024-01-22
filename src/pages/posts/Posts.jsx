@@ -20,10 +20,10 @@ import PopularProfiles from "../../components/PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import FilterFeed from "../../components/FilterFeed";
 
-const MESSAGE = "No results found. Adjust the search keyword or filter."
+const MESSAGE = "No results found. Adjust the search keyword or filter.";
 
 const Posts = () => {
-  const [filter, setFilter] = useState('')
+  const [filter, setFilter] = useState("");
   const [posts, setPosts] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
@@ -35,7 +35,9 @@ const Posts = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const { data } = await axiosReq.get(`/posts/?${filter}&search=${query}`);
+        const { data } = await axiosReq.get(
+          `/posts/?${filter}&search=${query}`
+        );
         setPosts(data);
         setHasLoaded(true);
       } catch (err) {

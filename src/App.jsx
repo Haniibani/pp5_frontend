@@ -26,9 +26,7 @@ const App = () => (
           exact
           path="/"
           render={() => (
-            <Posts
-              message="No results found. Adjust the search keyword or follow a user."
-            />
+            <Posts message="No results found. Adjust the search keyword or follow a user." />
           )}
         />
         <Route exact path="/posts/create" render={() => <PostCreate />} />
@@ -37,11 +35,7 @@ const App = () => (
         <Route exact path="/signin" render={() => <SignIn />} />
         <Route exact path="/signup" render={() => <SignUp />} />
         <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
-        <Route
-          exact
-          path="/profiles/:id/edit"
-          render={() => <ProfileEdit />}
-        />
+        <Route exact path="/profiles/:id/edit" render={() => <ProfileEdit />} />
         <Route
           exact
           path="/profiles/:id/edit/username"
@@ -52,9 +46,7 @@ const App = () => (
           path="/profiles/:id/edit/password"
           render={() => <UserPasswordForm />}
         />
-        <Route
-          render={() => <NotFound />}
-        />
+        <Route render={() => <NotFound />} />
       </Switch>
     </Container>
   </div>

@@ -1,8 +1,12 @@
 import React from "react";
+
+import { useHistory } from "react-router";
+
 import Dropdown from "react-bootstrap/Dropdown";
+
 import styles from "../styles/MoreDropdown.module.css";
 import btnStyles from "../styles/Button.module.css";
-import { useHistory } from "react-router";
+
 import Edit from "../icons/Edit";
 
 // The forwardRef is important!!

@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
+
 import { Link } from "react-router-dom";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import styles from "../../styles/CommentCreateEditForm.module.css";
+
+import { Form, InputGroup } from "react-bootstrap";
+
 import Avatar from "../../components/Avatar";
+
+import styles from "../../styles/CommentCreateEditForm.module.css";
+
 import { axiosRes } from "../../clients/axios";
 
 const CommentCreate = ({
@@ -15,11 +19,11 @@ const CommentCreate = ({
 }) => {
   const [content, setContent] = useState("");
 
-  const handleChange = (event) => {
+  const handleChange = useCallback((event) => {
     setContent(event.target.value);
-  };
+  }, []);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit =useCallback(async (event) => {
     event.preventDefault();
     try {
       const { data } = await axiosRes.post("/comments/", { content, post });
@@ -29,16 +33,16 @@ const CommentCreate = ({
       setPost((prevPost) => {
         return prevPost
           ? {
-              ...prevPost,
-              comments_count: (prevPost.comments_count ?? 0) + 1,
-            }
+            ...prevPost,
+            comments_count: (prevPost.comments_count ?? 0) + 1,
+          }
           : [];
       });
       setContent("");
     } catch (err) {
       console.error("Error submitting comment:", err);
     }
-  };
+  }, [content, post, setComments, setPost]);
 
   return (
     <Form className="mt-2" onSubmit={handleSubmit}>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 
 import { useHistory } from "react-router";
 
@@ -34,10 +34,13 @@ const PostCreate = () => {
   const imageInput = useRef(null);
   const history = useHistory();
 
-  const handleChange = ({ target: { name, value } }) =>
-    setPostData((prevState) => ({ ...prevState, [name]: value }));
+  const handleChange = useCallback(
+    ({ target: { name, value } }) =>
+      setPostData((prevState) => ({ ...prevState, [name]: value })),
+    []
+  );
 
-  const handleChangeImage = ({ target: { files } }) => {
+  const handleChangeImage = useCallback(({ target: { files } }) => {
     if (files.length) {
       URL.revokeObjectURL(image);
       setPostData((prevState) => ({
@@ -45,7 +48,7 @@ const PostCreate = () => {
         image: URL.createObjectURL(files[0]),
       }));
     }
-  };
+  }, [image]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
