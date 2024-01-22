@@ -178,7 +178,7 @@ Additionally, specific scripts were defined for building, testing, and starting 
 
 ## Testing
 
-To ensure the highest quality and functionality, the project includes comprehensive testing strategies:
+Unfortunately, the testing phase of the project has been inconsistent. I have attempted to resolve the issues by experimenting with different Node.js versions, but we still encountered inconsistencies. Furthermore, there has been a noticeable disparity between testing locally and using Gitpod. Additionally, I received notices indicating that some libraries in the project template are no longer supported, which might be contributing to the errors we are encountering during testing and deployment. It's worth mentioning that the project does include comprehensive testing strategies.
 
 ### Manual Testing
 
