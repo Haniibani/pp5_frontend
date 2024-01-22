@@ -70,14 +70,14 @@ const Post = ({
             )}
           </div>
         </Media>
-        <hr class="hr" />
+        <hr clasName="hr" />
         <Link to={`/posts/${id}`}>
           <div className={styles.ImageWrapper}>
             <Card.Img src={image} alt={title} />
             {tag && <div className={styles.Tag}>{tag}</div>}
           </div>
         </Link>
-        <hr class="hr" />
+        <hr clasName="hr" />
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && (
           <Card.Text>
