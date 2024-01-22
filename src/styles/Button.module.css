@@ -7,11 +7,13 @@
   margin-left: 2px;
   margin-right: 2px;
   min-width: 75px;
+  background-color: #84cda2;
 }
 
 .Button:hover {
   opacity: 0.8;
   border-color: transparent;
+  background-color: #5f8f73;
   cursor: pointer;
 }
 
@@ -32,15 +34,15 @@
   width: 100%;
 }
 
-.Blue,
-.BlueOutline:hover,
+.Green,
+.GreenOutline:hover,
 .Bright:hover {
   background-color: #84cda2;
   color: #ffffff;
 }
 
-.BlueOutline,
-.Blue:hover {
+.GreenOutline,
+.Green:hover {
   /* border: 1px solid #84cda2; */
   background-color: #ffffff;
   color: #84cda2;

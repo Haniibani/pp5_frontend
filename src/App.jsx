@@ -16,6 +16,7 @@ import NavBar from "./components/NavBar";
 import ProfileEdit from "./pages/profiles/ProfileEdit";
 import UsernameForm from "./pages/profiles/UserPasswordForm";
 import UserPasswordForm from "./pages/profiles/UsernameForm";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   const currentUser = useCurrentUser();
@@ -59,6 +60,9 @@ const App = () => {
             exact
             path="/profiles/:id/edit/password"
             render={() => <UserPasswordForm />}
+          />
+          <Route
+            render={() => <NotFound />}
           />
         </Switch>
       </Container>
