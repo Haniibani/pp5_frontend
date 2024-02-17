@@ -62,38 +62,35 @@ By focusing on these goals, Caption of the Day aims to establish itself as a pre
 
 ### User Stories
 
-1. **Navigation & Accessibility**
-   - As a user, I want to access a navigation bar from every page for easy navigation.
-   - As a user, I want efficient routing through pages for seamless content viewing without page refreshes.
-   - As a logged-out user, I want to see options to sign in or sign up for access to additional features.
-   - As a user, I want to view user avatars for easier identification within the application.
+#### Epic: User Authentication and Session Management
+- **User Story**: New User Sign-Up [#12](https://github.com/Haniibani/pp5_frontend/issues/12)
+- **User Story**: Persistent User Sessions [#5](https://github.com/Haniibani/pp5_frontend/issues/5)
+- **User Story**: Update Login Credentials [#13](https://github.com/Haniibani/pp5_frontend/issues/13)
+- **User Story**: Sign-In and Sign-Up Options for Logged-Out Users [#4](https://github.com/Haniibani/pp5_frontend/issues/4)
 
-2. **Authentication & Profile Management**
-   - As a new user, I want to sign up to access all features available to registered users.
-   - As a returning user, I want the system to remember my session to avoid frequent logins.
-   - As a user, I want to view and edit my profile, including changing my picture and bio.
-   - As a user, I want to update my login credentials for enhanced security and personalization.
-   - As a user, I want to follow or unfollow other users to curate my content feed.
+#### Epic: Performance and Error Handling
+- **User Story**: Fast and Responsive Application Performance [#10](https://github.com/Haniibani/pp5_frontend/issues/10)
+- **User Story**: Graceful Error Handling in the Application [#11](https://github.com/Haniibani/pp5_frontend/issues/11)
+- **User Story**: Continuous Access with Token Refresh [#18](https://github.com/Haniibani/pp5_frontend/issues/18)
 
-3. **Post Interaction & Management**
-   - As a logged-in user, I want to create and edit posts to share images and experiences.
-   - As a user, I want to comment on and like posts to engage with the community.
-   - As a post creator, I want to edit my posts for updates or corrections.
-   - As a comment creator, I want to edit or delete my comments to manage my contributions.
+#### Epic: Navigation and Accessibility
+- **User Story**: Consistent Navigation Bar Access [#2](https://github.com/Haniibani/pp5_frontend/issues/2)
+- **User Story**: Navigation Bar Accessibility on All Pages [#19](https://github.com/Haniibani/pp5_frontend/issues/19)
+- **User Story**: Efficient Routing for Seamless Content Viewing [#3](https://github.com/Haniibani/pp5_frontend/issues/3)
 
-4. **Content Discovery & Engagement**
-   - As a user, I want to view recent and popular posts to stay up-to-date with community content.
-   - As a user, I want to use keywords to search for specific posts and profiles.
-   - As a logged-in user, I want to view posts from users I follow and posts I have liked for personalized content.
+#### Epic: User Interface and Experience
+- **User Story**: Aesthetically Pleasing Interface Design [#9](https://github.com/Haniibani/pp5_frontend/issues/9)
+- **User Story**: Consistent Color Scheme and Design [#17](https://github.com/Haniibani/pp5_frontend/issues/17)
 
-5. **User Experience & Design**
-   - As a user, I want an aesthetically pleasing and readable interface for a comfortable experience.
-   - As a user, I want a visually appealing color scheme and consistent design across the platform.
-   - As a user, I want a fast and responsive application for a smooth browsing experience.
+#### Epic: Search and Content Discovery
+- **User Story**: Keyword-Based Search for Posts and Profiles [#8](https://github.com/Haniibani/pp5_frontend/issues/8)
 
-6. **Error Handling & System Reliability**
-   - As a user, I want the application to handle errors gracefully so that I can continue using the platform without confusion.
-   - As a user, I want to easily see my login status and have access token refresh for secure and continuous access.
+#### Epic: User Interaction and Content Management
+- **User Story**: User Profile View and Edit [#6](https://github.com/Haniibani/pp5_frontend/issues/6)
+- **User Story**: Creating and Editing User Posts [#7](https://github.com/Haniibani/pp5_frontend/issues/7)
+- **User Story**: Follow and Unfollow Users [#14](https://github.com/Haniibani/pp5_frontend/issues/14)
+- **User Story**: Discover Recent and Popular Posts [#15](https://github.com/Haniibani/pp5_frontend/issues/15)
+- **User Story**: Personalized Content Feed [#16](https://github.com/Haniibani/pp5_frontend/issues/16)
 
 ### Design Choices
 
