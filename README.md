@@ -2,7 +2,7 @@
 
 Caption of the Day is a social media platform where users engage through shared experiences and captions. It's an environment that fosters community interaction, creativity, and content discovery. Our platform is designed to offer a user-friendly experience with a focus on community engagement and personalized content.
 
-![Responsive Design Screenshot](src\assets\AmIResponsive.png)
+![Responsive Design Screenshot](src/assets/AmIResponsive.png)
 
 [View the live website on Heroku](https://caption-of-the-day-ed90d78aee19.herokuapp.com/)
 > **Note**: To open links in a new browser tab, press CTRL + Click.
