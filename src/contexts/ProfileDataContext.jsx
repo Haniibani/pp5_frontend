@@ -14,6 +14,7 @@ export const useProfileData = () => useContext(ProfileDataContext);
 export const useSetProfileData = () => useContext(SetProfileDataContext);
 
 export const ProfileDataProvider = ({ children }) => {
+  const [error, setError] = useState('');
   const [profileData, setProfileData] = useState({
     pageProfile: { results: [] },
     popularProfiles: { results: [] },
@@ -29,7 +30,7 @@ export const ProfileDataProvider = ({ children }) => {
 
       updateProfileDataWithFollow(clickedProfile, data.id);
     } catch (err) {
-      // Handle error
+      setError('Failed to follow the user.');
     }
   };
 
@@ -38,7 +39,7 @@ export const ProfileDataProvider = ({ children }) => {
       await axiosRes.delete(`/followers/${clickedProfile.following_id}/`);
       updateProfileDataWithUnfollow(clickedProfile);
     } catch (err) {
-      // Handle error
+      setError('Failed to unfollow the user.');
     }
   };
 
@@ -95,9 +96,11 @@ export const ProfileDataProvider = ({ children }) => {
   return (
     <ProfileDataContext.Provider value={profileData}>
       <SetProfileDataContext.Provider
-        value={{ setProfileData, handleFollow, handleUnfollow }}
+        value={{ setProfileData, handleFollow, handleUnfollow, error }}
       >
-        {children}
+        <div className={error ? Error.errorMessage : ''}>
+          {children}
+        </div>
       </SetProfileDataContext.Provider>
     </ProfileDataContext.Provider>
   );

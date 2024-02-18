@@ -7,6 +7,7 @@ import { Form, InputGroup } from "react-bootstrap";
 import Avatar from "../../components/Avatar";
 
 import styles from "../../styles/CommentCreateEditForm.module.css";
+import Error from "../../styles/ErrorMessage.module.css";
 
 import { axiosRes } from "../../clients/axios";
 
@@ -18,6 +19,7 @@ const CommentCreate = ({
   profile_id,
 }) => {
   const [content, setContent] = useState("");
+  const [error, setError] = useState('');
 
   const handleChange = useCallback((event) => {
     setContent(event.target.value);
@@ -40,35 +42,38 @@ const CommentCreate = ({
       });
       setContent("");
     } catch (err) {
-      console.error("Error submitting comment:", err);
+      setError('An error occurred while submitting your comment.');
     }
   }, [content, post, setComments, setPost]);
 
   return (
-    <Form className="mt-2" onSubmit={handleSubmit}>
-      <Form.Group>
-        <InputGroup>
-          <Link to={`/profiles/${profile_id}`}>
-            <Avatar src={profileImage} />
-          </Link>
-          <Form.Control
-            className={styles.Form}
-            placeholder="my comment..."
-            as="textarea"
-            value={content}
-            onChange={handleChange}
-            rows={2}
-          />
-        </InputGroup>
-      </Form.Group>
-      <button
-        className={`${styles.Button} btn d-block ml-auto`}
-        disabled={!content.trim()}
-        type="submit"
-      >
-        post
-      </button>
-    </Form>
+    <>
+      {error && <div className={Error.errorMessage}>{error}</div>} {/* Display error message */}
+      <Form className="mt-2" onSubmit={handleSubmit}>
+        <Form.Group>
+          <InputGroup>
+            <Link to={`/profiles/${profile_id}`}>
+              <Avatar src={profileImage} />
+            </Link>
+            <Form.Control
+              className={styles.Form}
+              placeholder="my comment..."
+              as="textarea"
+              value={content}
+              onChange={handleChange}
+              rows={2}
+            />
+          </InputGroup>
+        </Form.Group>
+        <button
+          className={`${styles.Button} btn d-block ml-auto`}
+          disabled={!content.trim()}
+          type="submit"
+        >
+          post
+        </button>
+      </Form>
+    </>
   );
 };
 

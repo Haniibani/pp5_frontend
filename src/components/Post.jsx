@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 
 import { Link, useHistory } from "react-router-dom";
 
@@ -13,6 +13,7 @@ import { MoreDropdown } from "./MoreDropdown";
 import LikeButton from "./LikeButton";
 
 import styles from "../styles/Post.module.css";
+import Error from "../styles/ErrorMessage.module.css";
 
 import Chat from "../icons/Chat";
 import Quote from "../icons/Quote";
@@ -35,7 +36,7 @@ const Post = ({
 }) => {
   const history = useHistory();
   const currentUser = useCurrentUser();
-
+  const [error, setError] = useState('');
   const isOwner = currentUser?.username === owner;
 
   const handleEdit = useCallback(
@@ -48,12 +49,13 @@ const Post = ({
       await axiosRes.delete(`/posts/${id}/`);
       history.goBack();
     } catch (err) {
-      console.error(err);
+      setError('An error occurred while trying to delete the post.');
     }
   }, [history, id]);
 
   return (
     <Card className={styles.Post}>
+      {error && <div className={Error.errorMessage}>{error}</div>} {/* Display error message */}
       <Card.Body className={styles.PostBar}>
         <Media className="align-items-center justify-content-between">
           <Link to={`/profiles/${profile_id}`}>

@@ -22,7 +22,7 @@ import tags from "../../constants/tags";
 
 const PostCreate = () => {
   useRedirect("loggedOut");
-  const [errors, setErrors] = useState({});
+  const [error, setError] = useState({});
   const [postData, setPostData] = useState({
     title: "",
     content: "",
@@ -63,13 +63,13 @@ const PostCreate = () => {
       history.push(`/posts/${data.id}`);
     } catch (err) {
       if (err.response?.status !== 401) {
-        setErrors(err.response?.data);
+        setError(err.response?.data);
       }
     }
   };
 
   const renderAlerts = (field) =>
-    errors[field]?.map((message, idx) => (
+    error[field]?.map((message, idx) => (
       <Alert variant="warning" key={idx}>
         {message}
       </Alert>

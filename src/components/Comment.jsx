@@ -9,10 +9,12 @@ import { MoreDropdown } from "./MoreDropdown";
 import CommentEdit from "../pages/comments/CommentEdit";
 
 import styles from "../styles/Comment.module.css";
+import Error from "../styles/ErrorMessage.module.css";
 
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 
 import { axiosRes } from "../clients/axios";
+
 
 const Comment = (props) => {
   const {
@@ -22,35 +24,32 @@ const Comment = (props) => {
     updated_at,
     content,
     id,
-    setPost,
     setComments,
+    refetch
   } = props;
 
   const [showEditForm, setShowEditForm] = useState(false);
   const currentUser = useCurrentUser();
+  const [error, setError] = useState('');
   const is_owner = currentUser?.username === owner;
 
   const handleDelete = async () => {
     try {
-      await axiosRes.delete(`/comments/${id}/`);
-      setPost((prevPost) => ({
-        results: [
-          {
-            ...prevPost.results[0],
-            comments_count: prevPost.results[0].comments_count - 1,
-          },
-        ],
-      }));
-
-      setComments((prevComments) => ({
-        ...prevComments,
-        results: prevComments.results.filter((comment) => comment.id !== id),
-      }));
-    } catch (err) {}
+      const response = await axiosRes.delete(`/comments/${id}/`);
+      if (response.status === 204) { // Assuming 204 No Content on successful deletion
+        refetch()
+      } else {
+        setError('Failed to delete the comment.');
+      }
+    } catch (err) {
+      setError('An error occurred while trying to delete the comment.');
+    console.error(err);
+    }
   };
 
   return (
     <>
+    {error && <div className={Error.errorMessage}>{error}</div>}
       <hr />
       <Media>
         <Link to={`/profiles/${profile_id}`}>
@@ -67,6 +66,7 @@ const Comment = (props) => {
               profileImage={profile_image}
               setComments={setComments}
               setShowEditForm={setShowEditForm}
+              refetch={refetch}
             />
           ) : (
             <p>{content}</p>
