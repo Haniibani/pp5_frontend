@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
-
-import { useParams } from "react-router";
+import React from "react";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { Col, Row, Container } from "react-bootstrap";
-
-import { axiosReq } from "../../clients/axios";
 
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
@@ -20,29 +16,11 @@ import PopularProfiles from "../../components/PopularProfiles";
 import Asset from "../../components/Asset";
 
 import appStyles from "../../styles/App.module.css";
+import usePostData from "../../hooks/usePostData";
 
 const Post = () => {
-  const { id } = useParams();
-  const [post, setPost] = useState(null);
-  const [comments, setComments] = useState([]);
   const currentUser = useCurrentUser();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [{ data: post }, { data: commentsData }] = await Promise.all([
-          axiosReq.get(`/posts/${id}`),
-          axiosReq.get(`/comments/?post=${id}`),
-        ]);
-        setPost(post);
-        setComments(commentsData.results);
-      } catch (err) {
-        // Handle error
-      }
-    };
-
-    fetchData();
-  }, [id]);
+  const { id, setComments, setPost, comments, post, refetch } = usePostData();
 
   return (
     <Row className="h-100">
@@ -72,6 +50,7 @@ const Post = () => {
                   {...comment}
                   setPost={setPost}
                   setComments={setComments}
+                  refetch={refetch}
                 />
               ))}
             </InfiniteScroll>
